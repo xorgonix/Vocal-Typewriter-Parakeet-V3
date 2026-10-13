@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vocal Typewriter - Parakeet V3</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="header-content">
+                <h1>🦜 Vocal Typewriter <span class="badge">Parakeet V3</span></h1>
+                <div class="subtitle">Powered by Parakeet V3</div>
+            </div>
+            <div class="status-indicator disconnected" id="connectionStatus">Disconnected</div>
+        </header>
+
+        <main>
+            <div class="controls-section">
+                <div class="control-group">
+                    <label>Microphone</label>
+                    <select id="micSelect"></select>
+                </div>
+                
+                <button id="recordBtn" class="icon-btn" title="Start Recording">
+                    <i class="fas fa-microphone"></i>
+                </button>
+                <button id="restartBtn" class="icon-btn" title="Restart Session">
+                    <i class="fas fa-redo"></i>
+                </button>
+                <button id="logsBtn" class="icon-btn" title="Session Logs">
+                    <i class="fas fa-file-alt"></i>
+                </button>
+            </div>
+
+            <div class="metrics-section">
+                <div class="metric-card">
+                    <span class="label">Speed</span>
+                    <span class="value" id="wpmValue">0</span>
+                    <span class="unit">x</span>
+                </div>
+                <div class="metric-card">
+                    <span class="label">Latency</span>
+                    <span class="value" id="latencyValue">0</span>
+                    <span class="unit">ms</span>
+                </div>
+            </div>
+
+            <div class="visualizer-container">
+                <canvas id="waveCanvas"></canvas>
+            </div>
+
+            <div class="output-section">
+                <div class="output-header">
+                    <div class="header-left">
+                        <span>Transcription</span>
+                    </div>
+                    <div class="header-right">
+                        <button id="clearBtn" class="sm-btn" title="Clear">🗑️</button>
+                        <button id="copyBtn" class="sm-btn">Copy</button>
+                    </div>
+                </div>
+                <div id="transcriptionBox" class="transcription-box"></div>
+            </div>
+        </main>
+        
+        <footer>
+            Made with ❤️ by Loomis Green
+        </footer>
+    </div>
+
+    <div id="logsModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Session Logs</h2>
+                <button id="closeLogsBtn" class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="logsContainer" class="logs-container">
+                    <!-- Logs injected here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
