@@ -1,0 +1,428 @@
+:root {
+    --bg-color: #0f1115;
+    --card-bg: #1a1d23;
+    --accent: #00ff9d;
+    --accent-glow: rgba(0, 255, 157, 0.2);
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0a0;
+    --danger: #ff4757;
+    --font-main: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 1rem;
+    padding-bottom: 4rem; /* Add padding to prevent footer overlap */
+}
+
+.app-container {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+}
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.subtitle {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 2px;
+}
+
+h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.badge {
+    background: var(--accent-glow);
+    color: var(--accent);
+    font-size: 0.8rem;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.status-indicator {
+    font-size: 0.8rem;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.status-indicator.connected {
+    background: rgba(0, 255, 157, 0.1);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+}
+
+.status-indicator.disconnected {
+    background: rgba(255, 71, 87, 0.1);
+    color: var(--danger);
+    border: 1px solid var(--danger);
+}
+
+/* Controls */
+.controls-section {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-end;
+}
+
+.control-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.control-group label {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+select {
+    background: var(--card-bg);
+    border: 1px solid #333;
+    color: white;
+    padding: 0.8rem;
+    border-radius: 8px;
+    outline: none;
+    font-family: var(--font-main);
+}
+
+/* Icon Buttons */
+.icon-btn {
+    background: var(--card-bg);
+    border: 1px solid #333;
+    color: white;
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.icon-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.icon-btn.recording {
+    background: rgba(255, 71, 87, 0.1);
+    border-color: var(--danger);
+    color: var(--danger);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 71, 87, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0); }
+}
+
+/* Metrics */
+.metrics-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.metric-card {
+    background: var(--card-bg);
+    padding: 1rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    border: 1px solid #333;
+}
+
+.metric-card .label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    flex: 1;
+}
+
+.metric-card .value {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.metric-card .unit {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Visualizer */
+.visualizer-container {
+    height: 60px;
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #333;
+    position: relative;
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+}
+
+/* Output */
+.output-section {
+    background: var(--card-bg);
+    border-radius: 12px;
+    border: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.output-header {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.header-left span {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.sm-btn {
+    background: none;
+    border: 1px solid #444;
+    color: #ccc;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.sm-btn:hover {
+    border-color: var(--accent);
+    color: white;
+}
+
+.transcription-box {
+    height: 500px;
+    padding: 1.5rem;
+    overflow-y: auto;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #e0e0e0;
+    scroll-behavior: smooth;
+}
+
+.latest-text {
+    color: var(--accent) !important;
+    font-weight: bold;
+    animation: highlight 1.5s ease-out;
+}
+
+@keyframes highlight {
+    0% { background-color: rgba(0, 255, 157, 0.2); }
+    100% { background-color: transparent; }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #1a1d23;
+}
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #444;
+}
+
+/* Modal Styling */
+.modal {
+    display: flex; 
+    position: fixed; 
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.8); 
+    justify-content: center;
+    align-items: center;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background-color: var(--card-bg);
+    border: 1px solid #333;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+.modal-header {
+    padding: 1rem 1.5rem;
+    background: #252830;
+    border-bottom: 1px solid #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 12px 12px 0 0;
+}
+
+.modal-header h2 {
+    font-size: 1.2rem;
+    color: var(--accent);
+}
+
+.close-btn {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-body {
+    padding: 1.5rem;
+    overflow-y: auto;
+}
+
+/* New Logs Layout */
+.logs-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.log-entry {
+    background: #202329;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+}
+
+.log-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.8rem;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.stat-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 2px;
+}
+
+.stat-value {
+    color: #e0e0e0;
+}
+
+.stat-value.highlight {
+    color: var(--accent);
+    font-weight: bold;
+}
+
+.log-divider {
+    height: 1px;
+    background-color: var(--accent);
+    width: 100%;
+    margin-bottom: 0.8rem;
+    opacity: 0.5;
+}
+
+.log-text {
+    color: #fff;
+    font-size: 1rem;
+    line-height: 1.5;
+    word-wrap: break-word;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
+    background-color: var(--bg-color); /* Match bg to hide scroll behind it */
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4rem;
+    z-index: 100;
+    border-top: 1px solid #333; /* Optional: adds a nice separation */
+}
+
+/* Remove the old animation since we are using an emoji now, or keep it if we wrap the emoji in a span */
+/* But user just asked for emoji. */
