@@ -1,0 +1,33 @@
+[package]
+name = "parakeet-standalone"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0"
+transcribe-rs = { git = "https://github.com/cjpais/transcribe-rs", features = ["parakeet"] }
+ort = { version = "2.0.0-rc.9", features = ["download-binaries"] }
+# Force ndarray 0.16 to match transcribe-rs (if needed, but let's try to let cargo resolve or explicit if broken)
+# Actually, I should probably keep the explicit ndarray if I had it before, but previous tool call didn't show it in old_str properly.
+# Let's include the basics.
+axum = { version = "0.7", features = ["ws", "multipart"] }
+tokio = { version = "1.0", features = ["full"] }
+tower-http = { version = "0.5", features = ["fs", "cors", "trace"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tracing = "0.1"
+tracing-subscriber = "0.3"
+
+[profile.release]
+opt-level = 0
+lto = false
+codegen-units = 1
+strip = true
+panic = "abort"
+debug = false
+incremental = false
+
+[profile.dev]
+opt-level = 0
+debug = false
+incremental = false

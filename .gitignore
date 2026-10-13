@@ -1,0 +1,8 @@
+target/
+**/*.DS_Store
+.env
+models/
+HUGGINGFACE_SSH_KEY.txt
+__pycache__/
+venv/
+*.pyc
